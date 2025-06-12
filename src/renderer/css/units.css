@@ -1,0 +1,9 @@
+/* Unit definitions */
+:root {
+    --space: 8px;
+    --border-radius: 4px;
+    --font-size-small: 12px;
+    --font-size-normal: 14px;
+    --font-size-large: 16px;
+    --line-height: 1.5;
+} 

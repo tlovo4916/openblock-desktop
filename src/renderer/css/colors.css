@@ -1,0 +1,13 @@
+/* Color definitions */
+:root {
+    --ui-primary: #4C97FF;
+    --ui-secondary: #F9F9F9;
+    --ui-tertiary: #E5E5E5;
+    --ui-black-transparent: rgba(0, 0, 0, 0.15);
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --white: #FFFFFF;
+    --motion-primary: #4C97FF;
+    --motion-primary-transparent: rgba(76, 151, 255, 0.9);
+    --motion-tertiary: #B3D9FF;
+} 
