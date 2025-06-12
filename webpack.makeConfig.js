@@ -17,7 +17,13 @@ const postcssImport = require('postcss-import');
 
 const isProduction = (process.env.NODE_ENV === 'production');
 
+// Temporarily clear NODE_OPTIONS to avoid conflicts with Electron
+const originalNodeOptions = process.env.NODE_OPTIONS;
+delete process.env.NODE_OPTIONS;
 const electronVersion = childProcess.execSync(`${electronPath} --version`, {encoding: 'utf8'}).trim();
+if (originalNodeOptions) {
+    process.env.NODE_OPTIONS = originalNodeOptions;
+}
 console.log(`Targeting Electron ${electronVersion}`); // eslint-disable-line no-console
 
 const makeConfig = function (defaultConfig, options) {
