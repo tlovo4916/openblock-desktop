@@ -36,14 +36,30 @@ class OpenblockDesktopLink {
             fs.mkdirSync(cacheResourcesPath, {recursive: true});
         }
 
+        try {
         this._link = new OpenBlockLink(this.dataPath, path.join(this.appPath, 'tools'));
+        } catch (error) {
+            console.warn('Failed to initialize OpenBlock Link:', error.message);
+            this._link = null;
+        }
+
+        try {
         this._resourceServer = new OpenblockResourceServer(cacheResourcesPath,
             path.join(this.appPath, 'external-resources'),
             app.getLocaleCountryCode());
+        } catch (error) {
+            console.warn('Failed to initialize resource server:', error.message);
+            this._resourceServer = null;
+        }
     }
 
     get resourceServer () {
-        return this._resourceServer;
+        return this._resourceServer || {
+            // 创建一个fallback对象，避免调用时出错
+            listen: () => console.warn('Resource server not available'),
+            close: () => console.warn('Resource server not available'),
+            port: 0
+        };
     }
 
     installDriver (callback = null) {
@@ -77,10 +93,26 @@ class OpenblockDesktopLink {
     }
 
     start () {
+        if (this._link) {
+            try {
         this._link.listen();
+            } catch (error) {
+                console.warn('Failed to start OpenBlock Link:', error.message);
+            }
+        } else {
+            console.warn('OpenBlock Link not initialized, skipping...');
+        }
 
+        if (this._resourceServer) {
+            try {
         // start resource server
         this._resourceServer.listen();
+            } catch (error) {
+                console.warn('Failed to start resource server:', error.message);
+            }
+        } else {
+            console.warn('Resource server not initialized, skipping...');
+        }
     }
 }
 

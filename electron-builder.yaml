@@ -3,11 +3,11 @@ directories:
   output: dist
 extraFiles: ['LICENSE', 'LICENSE.ScratchFoundation', 'TRADEMARK', "tools", "external-resources", 'firmwares', "drivers"]
 
-appId: com.supiedt.supie-demo-desktop
-productName: "Supie-Demo-Desktop"
+appId: com.supiedt.Supie-Desktop-Demo
+productName: "Supie-Desktop-Demo"
 publish:
   - provider: github
-artifactName: "Supie-Demo-Desktop_v${version}_${os}_${arch}.${ext}"
+artifactName: "Supie-Desktop-Demo_v${version}_${os}_${arch}.${ext}"
 
 fileAssociations:
   ext: ob
@@ -30,8 +30,9 @@ mac:
   icon: buildResources/OpenBlockDesktop.icns
   provisioningProfile: embedded.provisionprofile
   target:
-    - dmg
-    # - mas
+    - target: dmg
+      arch:
+        - arm64  # ARM架构 (适用于Mac mini M4)
 dmg:
   title: "OpenBlock-Desktop_${version}"
   format: UDRO
@@ -48,8 +49,9 @@ dmg:
 win:
   icon: buildResources/OpenBlockDesktop.ico
   target:
-    # - appx
-    - nsis
+    - target: nsis
+      arch:
+        - x64   # 64位架构 (适用于Windows 11 64位)
 # appx:
 #   identityName: "OpenblockTeam.OpenblockDesktop
 #   publisherDisplayName: "OpenBlock Team"

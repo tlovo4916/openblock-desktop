@@ -11,37 +11,20 @@ const ScratchDesktopAppStateHOC = function (WrappedComponent) {
     class ScratchDesktopAppStateComponent extends React.Component {
         constructor (props) {
             super(props);
-            bindAll(this, [
-                'handleTelemetryModalOptIn',
-                'handleTelemetryModalOptOut'
-            ]);
             this.state = {
-                // use `sendSync` because this should be set before first render
-                telemetryDidOptIn: ipcRenderer.sendSync('getTelemetryDidOptIn')
+                telemetryDidOptIn: false
             };
         }
-        handleTelemetryModalOptIn () {
-            ipcRenderer.send('setTelemetryDidOptIn', true);
-            ipcRenderer.invoke('getTelemetryDidOptIn').then(telemetryDidOptIn => {
-                this.setState({telemetryDidOptIn});
-            });
-        }
-        handleTelemetryModalOptOut () {
-            ipcRenderer.send('setTelemetryDidOptIn', false);
-            ipcRenderer.invoke('getTelemetryDidOptIn').then(telemetryDidOptIn => {
-                this.setState({telemetryDidOptIn});
-            });
-        }
+        
         render () {
-            const shouldShowTelemetryModal = (typeof ipcRenderer.sendSync('getTelemetryDidOptIn') !== 'boolean');
+            const shouldShowTelemetryModal = false;
 
             return (<WrappedComponent
                 isTelemetryEnabled={this.state.telemetryDidOptIn}
-                onTelemetryModalOptIn={this.handleTelemetryModalOptIn}
-                onTelemetryModalOptOut={this.handleTelemetryModalOptOut}
+                onTelemetryModalOptIn={() => {}}
+                onTelemetryModalOptOut={() => {}}
                 showTelemetryModal={shouldShowTelemetryModal}
 
-                // allow passed-in props to override any of the above
                 {...this.props}
             />);
         }

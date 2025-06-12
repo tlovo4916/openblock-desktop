@@ -1,5 +1,5 @@
 #!/bin/bash
-SRC=../src/icon/OpenBlockDesktop.svg
+SRC=../src/icon/OpenBlockDesktop.png
 OUT_ICONSET=OpenBlockDesktop.iconset
 OUT_ICNS=OpenBlockDesktop.icns
 OUT_ICO=OpenBlockDesktop.ico
@@ -40,6 +40,7 @@ if command -v convert >/dev/null 2>&1; then
             resize "${SIZE2}" "${SIZE2}" "${SRC}" "${OUT_ICONSET}/icon_${SIZE}x${SIZE}@2x.png" -density 144 -units PixelsPerInch
         done
         iconutil -c icns --output "${OUT_ICNS}" "${OUT_ICONSET}"
+        echo "✅ 生成Mac图标: ${OUT_ICNS}"
     else
         echo "iconutil is not available - skipping ICNS and ICONSET"
     fi
@@ -51,6 +52,7 @@ if command -v convert >/dev/null 2>&1; then
     done
     # Asking for "Zip" compression actually results in PNG compression
     convert "${TMP_ICO}"/icon_*.png -colorspace sRGB -compress Zip "${OUT_ICO}"
+    echo "✅ 生成Windows图标: ${OUT_ICO}"
 
     # Windows AppX
     mkdir -p "appx"
@@ -58,6 +60,19 @@ if command -v convert >/dev/null 2>&1; then
     resize 50 50 "${SRC}" 'appx/StoreLogo.png'
     resize 150 150 "${SRC}" 'appx/Square150x150Logo.png'
     resize 310 150 "${SRC}" 'appx/Wide310x150Logo.png'
+    echo "✅ 生成Windows AppX图标"
+
+    # 清理临时文件
+    rm -rf "${TMP_ICO}"
+    rm -rf "${OUT_ICONSET}"
+    
+    echo ""
+    echo "🎉 图标生成完成！"
+    echo "📁 生成的文件："
+    echo "  - Mac: ${OUT_ICNS}"
+    echo "  - Windows: ${OUT_ICO}"
+    echo "  - AppX: appx/ 目录"
 else
     echo "ImageMagick is not available - cannot convert icons"
+    echo "请安装 ImageMagick: brew install imagemagick"
 fi

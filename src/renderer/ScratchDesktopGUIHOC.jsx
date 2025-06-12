@@ -225,36 +225,36 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
             return (
                 <React.Fragment>
                     <WrappedComponent
-                        canEditTitle
-                        canModifyCloudData={false}
-                        canSave={false}
-                        isScratchDesktop
-                        onClickAbout={[
-                            {
-                                title: (<FormattedMessage
-                                    defaultMessage="About"
-                                    description="Menu bar item for about"
-                                    id="gui.desktopMenuBar.about"
-                                />),
-                                onClick: () => this.handleClickAbout()
-                            }
-                        ]}
-                        onClickLogo={this.handleClickLogo}
-                        onClickCheckUpdate={this.handleClickCheckUpdate}
-                        onClickUpdate={this.handleClickUpdate}
-                        onAbortUpdate={this.handleAbortUpdate}
-                        onClickInstallDriver={this.handleClickInstallDriver}
-                        onClickClearCache={this.handleClickClearCache}
+                canEditTitle
+                canModifyCloudData={false}
+                canSave={false}
+                isScratchDesktop
+                onClickAbout={[
+                    {
+                        title: (<FormattedMessage
+                            defaultMessage="About"
+                            description="Menu bar item for about"
+                            id="gui.desktopMenuBar.about"
+                        />),
+                        onClick: () => this.handleClickAbout()
+                    }
+                ]}
+                onClickLogo={this.handleClickLogo}
+                onClickCheckUpdate={this.handleClickCheckUpdate}
+                onClickUpdate={this.handleClickUpdate}
+                onAbortUpdate={this.handleAbortUpdate}
+                onClickInstallDriver={this.handleClickInstallDriver}
+                onClickClearCache={this.handleClickClearCache}
                         onClickSettings={this.handleClickSettings}
-                        onProjectTelemetryEvent={this.handleProjectTelemetryEvent}
-                        onShowMessageBox={this.handleShowMessageBox}
-                        onShowPrivacyPolicy={showPrivacyPolicy}
-                        onStorageInit={this.handleStorageInit}
-                        onUpdateProjectTitle={this.handleUpdateProjectTitle}
+                onProjectTelemetryEvent={this.handleProjectTelemetryEvent}
+                onShowMessageBox={this.handleShowMessageBox}
+                onShowPrivacyPolicy={showPrivacyPolicy}
+                onStorageInit={this.handleStorageInit}
+                onUpdateProjectTitle={this.handleUpdateProjectTitle}
                         onOpenAiAssistant={this.handleOpenAiAssistant}
 
-                        // allow passed-in props to override any of the above
-                        {...childProps}
+                // allow passed-in props to override any of the above
+                {...childProps}
                     />
                     <AiAssistantModal
                         isOpen={this.state.aiAssistantModalVisible}

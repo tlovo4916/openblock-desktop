@@ -179,11 +179,12 @@ class TelemetryClient {
      * @type {boolean}
      */
     get didOptIn () {
-        // don't supply a default here: we want to track "opt out" separately from "undecided"
-        return this._store.get('optIn');
+        // 默认禁用遥测，不再从存储中获取
+        return false;
     }
     set didOptIn (value) {
-        this._store.set('optIn', !!value);
+        // 不再保存遥测选择，始终保持禁用状态
+        // this._store.set('optIn', !!value);
     }
 
     /**

@@ -92,14 +92,15 @@ const scratchDesktopTelemetrySingleton = new ScratchDesktopTelemetry();
 
 // `handle` works with `invoke`
 ipcMain.handle('getTelemetryDidOptIn', () =>
-    scratchDesktopTelemetrySingleton.didOptIn
+    false // 始终返回false，禁用遥测
 );
 // `on` works with `sendSync` (and `send`)
 ipcMain.on('getTelemetryDidOptIn', event => {
-    event.returnValue = scratchDesktopTelemetrySingleton.didOptIn;
+    event.returnValue = false; // 始终返回false，禁用遥测
 });
 ipcMain.on('setTelemetryDidOptIn', (event, arg) => {
-    scratchDesktopTelemetrySingleton.didOptIn = arg;
+    // 不再处理遥测设置，保持禁用状态
+    // scratchDesktopTelemetrySingleton.didOptIn = arg;
 });
 ipcMain.on('projectDidLoad', (event, arg) => {
     scratchDesktopTelemetrySingleton.projectDidLoad(arg);

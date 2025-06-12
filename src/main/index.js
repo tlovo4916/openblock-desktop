@@ -591,6 +591,8 @@ app.on('ready', () => {
         _windows.main.show();
         _windows.loading.close();
         delete _windows.loading;
+        
+
     });
 });
 

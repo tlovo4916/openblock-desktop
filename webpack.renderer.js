@@ -19,8 +19,8 @@ const getModulePath = moduleName => {
     }
 };
 
-module.exports = defaultConfig =>
-    makeConfig(
+module.exports = defaultConfig => {
+    const config = makeConfig(
         defaultConfig,
         {
             name: 'renderer',
@@ -50,3 +50,12 @@ module.exports = defaultConfig =>
             ]
         }
     );
+
+    // 修复React模块打包问题：确保react-modal不被设置为external
+    if (config.externals && Array.isArray(config.externals)) {
+        // 移除react-modal从externals中，让它被正常打包
+        config.externals = config.externals.filter(external => external !== 'react-modal');
+    }
+
+    return config;
+};

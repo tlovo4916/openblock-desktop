@@ -11,6 +11,7 @@
     "i18n:src": "mkdirp translations/core && format-message extract --out-file translations/core/en.json src/main/**.js",
     "i18n:push": "tx-push-src openblock-editor desktop translations/core/en.json",
     "start": "mkdirp ./dist && electron-webpack dev --bail --display-error-details --env.minify=false --no-progress",
+
     "compile": "mkdirp ./dist && electron-webpack --bail --display-error-details --env.minify=false --no-progress",
     "fetch:drivers": "rimraf ./drivers && node scripts/download-driver.js",
     "fetch:exts": "rimraf ./external-resources && node ./node_modules/openblock-resource/script/download.js  --repo=openblockcc/external-resources-v3",
@@ -37,7 +38,6 @@
     "bytes": "^3.1.2",
     "openblock-link": "^0.2.0-prerelease.20250608112023",
     "openblock-resource": "^0.2.0-prerelease.20250302101433",
-    "react-modal": "^3.16.3",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -70,9 +70,11 @@
     "eslint-config-scratch": "^6.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react": "^7.20.0",
+    "file-loader": "^6.2.0",
     "format-message": "^6.2.3",
     "format-message-cli": "^6.2.3",
     "fs-extra": "^11.1.0",
+    "html-webpack-plugin": "^4.5.2",
     "intl": "1.2.5",
     "lodash.bindall": "^4.4.0",
     "lodash.defaultsdeep": "^4.6.1",
@@ -92,9 +94,11 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-intl": "2.9.0",
+    "react-modal": "^3.16.3",
     "react-redux": "5.0.7",
     "redux": "3.7.2",
     "rimraf": "^3.0.2",
+    "style-loader": "^2.0.0",
     "sudo-prompt": "^9.2.1",
     "uuid": "^8.3.2",
     "webpack": "^4.43.0"
