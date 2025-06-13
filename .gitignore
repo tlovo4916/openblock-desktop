@@ -18,6 +18,7 @@ npm-*
 /dist
 /.opt-in
 /*.provisionprofile
+/package-lock.json
 
 # don't store the assets downloaded with the `fetch` script
 /static
